@@ -7,7 +7,11 @@ module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
     this.log(
-      yosay(`Welcome to the terrific ${chalk.red('generator-redux-observable-kit')} generator!`)
+      yosay(
+        `Welcome to the terrific ${chalk.red(
+          'generator-redux-observable-kit'
+        )} generator!`
+      )
     );
 
     const prompts = [
