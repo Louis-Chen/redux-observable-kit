@@ -51,14 +51,10 @@ module.exports = class extends Generator {
 
   renderTplFile() {
     let target = [
-      ['_babelrc', '.babelrc'],
-      ['_editorconfig', '.editorconfig'],
-      ['_gitignore', '.gitignore'],
-      ['_postcssrc.js', '.postcssrc.js'],
       'database/people.json',
       'public/favicon.ico',
       'public/index.html',
-      'public/manifest,json',
+      'public/manifest.json',
       'src/page/home/components/home.js',
       'src/page/home/containers/home.js',
       'src/page/home/store/action.js',
