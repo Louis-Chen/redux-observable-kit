@@ -4,5 +4,5 @@ import { userReducer } from '../page/home/store/reducer';
 
 export default combineReducers({
   routing: routerReducer,
-  userReducer
+  appData: userReducer
 });
