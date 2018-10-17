@@ -31,8 +31,8 @@ module.exports = class extends Generator {
 
   writing() {
     this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt'),
+      this.templatePath('package.json'),
+      this.destinationPath('package.json'),
       this.initPackage(),
       this.renderTplFile()
     );
