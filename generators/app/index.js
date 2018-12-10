@@ -27,17 +27,6 @@ module.exports = class extends Generator {
 				name: 'projectTitle',
 				message: 'Please input project title (webpack示例):',
 				default: 'react-rx-kit'
-			},
-			{
-				type: 'input',
-				name: 'projectDesc',
-				message: 'Please input project description:'
-			},
-			{
-				type: 'list',
-				name: 'projectLicense',
-				message: 'Please choose license:',
-				choices: ['MIT', 'ISC', 'Apache-2.0', 'AGPL-3.0']
 			}
 		];
 
@@ -58,15 +47,6 @@ module.exports = class extends Generator {
 			mkdirp(this.props.projectName);
 			this.destinationRoot(this.destinationPath(this.props.projectName));
 		}
-
-		const readmeTpl = _.template(this.fs.read(this.templatePath('README.md')));
-		this.fs.write(
-			this.destinationPath('README.md'),
-			readmeTpl({
-				projectTitle: this.props.projectTitle,
-				projectDesc: this.props.projectDesc
-			})
-		);
 
 		this.fs.copy(
 			this.templatePath('package.json'),
