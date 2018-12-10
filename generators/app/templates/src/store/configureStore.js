@@ -7,7 +7,7 @@ import { createBrowserHistory } from 'history';
 import rootReducer from './reducer';
 import rootEpic from './epic';
 
-const epicMiddleware = createEpicMiddleware(rootEpic);
+const epicMiddleware = createEpicMiddleware();
 
 export const history = createBrowserHistory();
 
@@ -28,6 +28,6 @@ const composedEnhancers = compose(
   ...enhancers
 );
 
-const store = createStore(rootReducer(history), initialState, composedEnhancers);
+epicMiddleware.run(rootEpic);
 
-export default store;
+export const store = createStore(rootReducer(history), initialState, composedEnhancers);
