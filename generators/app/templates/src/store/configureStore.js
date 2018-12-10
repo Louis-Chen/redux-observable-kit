@@ -5,28 +5,27 @@ import { createLogger } from 'redux-logger';
 import { createBrowserHistory } from 'history';
 
 /**
- * firebase
+ * Firebase
  */
 
-import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'
-import { reduxFirestore } from 'redux-firestore'
-import firebase from 'firebase'
-import 'firebase/firestore' // <- needed if using firestore
+// import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
+// import { reduxFirestore } from 'redux-firestore';
+// import firebase from 'firebase';
+// import 'firebase/firestore'; // <- needed if using firestore
 
 /**
  * localStorge
  */
 
-import { persistReducer, persistStore } from 'redux-persist'
-import storage from 'redux-persist/lib/storage' // defaults to localStorage for web and AsyncStorage for react-native
-import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
-
+// import { persistReducer, persistStore } from 'redux-persist';
+// import storage from 'redux-persist/lib/storage'; // Defaults to localStorage for web and AsyncStorage for react-native
+// import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
 import rootReducer from './reducer';
 import rootEpic from './epic';
 
 /**
- * react-redux-firebase
+ * React-redux-firebase
  */
 
 // const firebaseConfig = {
@@ -69,17 +68,16 @@ import rootEpic from './epic';
 // 	whitelist: ['cart']
 // }
 
-
 const epicMiddleware = createEpicMiddleware();
 
 export const history = createBrowserHistory();
 
-// const persistedReducer = persistReducer(persistConfig, rootReducer(history))
+// Const persistedReducer = persistReducer(persistConfig, rootReducer(history))
 
 const initialState = {};
 const enhancers = [];
 const middleware = [routerMiddleware(history), epicMiddleware];
-// firebase
+// Firebase
 // const middleware = [routerMiddleware(history), thunk.withExtraArgument(getFirebase), epicMiddleware]
 
 if (process.env.NODE_ENV === 'development') {
@@ -91,8 +89,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const composedEnhancers = compose(
-  // reactReduxFirebase(firebase, reactReduxFirebaseConfig),
-	// reduxFirestore(firebase),
+  // ReactReduxFirebase(firebase, reactReduxFirebaseConfig),
+  // reduxFirestore(firebase),
   applyMiddleware(...middleware),
   ...enhancers
 );
@@ -102,7 +100,7 @@ epicMiddleware.run(rootEpic);
 export const store = createStore(rootReducer(history), initialState, composedEnhancers);
 
 /**
- * firebase / persitor
+ * Firebase / persitor
  */
 // export const store = createStoreWithFirebase(
 // 	persistedReducer, // root reducer with router state

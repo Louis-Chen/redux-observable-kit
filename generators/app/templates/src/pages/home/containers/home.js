@@ -5,7 +5,7 @@ import { HomeComponent } from '../components/home';
 
 function mapStateToProps(state) {
 	return {
-		appData: state.appData
+		user: state.user
 	}
 }
 

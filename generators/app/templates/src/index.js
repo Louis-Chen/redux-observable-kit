@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-// 沒有加 /es 會undefined 程式跑不出來
+
 import { ConnectedRouter } from 'connected-react-router';
 import { store, history } from './store/configureStore';
 
