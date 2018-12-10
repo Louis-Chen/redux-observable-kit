@@ -6,7 +6,7 @@
   "author": {
     "name": "LuisChen",
     "email": "leo5916267@gmail.com",
-    "url": ""
+    "url": "https://github.com/Louis-Chen"
   },
   "files": [
     "generators"
@@ -26,14 +26,17 @@
     "jest": "^22.0.6",
     "lint-staged": "^4.2.1",
     "nsp": "^3.0.0",
-    "prettier": "^1.7.0",
     "yeoman-assert": "^3.1.0",
     "yeoman-test": "^1.7.0"
   },
   "dependencies": {
     "chalk": "^2.1.0",
+    "connected-react-router": "^6.0.0",
     "deep-extend": "^0.6.0",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.11",
+    "mkdirp": "^0.5.1",
+    "path": "^0.12.7",
+    "prettier": "^1.15.3",
     "yeoman-generator": "^2.0.1",
     "yosay": "^2.0.1"
   },
@@ -58,25 +61,12 @@
   },
   "eslintConfig": {
     "extends": [
-      "xo",
-      "prettier"
+      "xo"
     ],
     "env": {
       "jest": true,
       "node": true
-    },
-    "rules": {
-      "prettier/prettier": [
-        "error",
-        {
-          "singleQuote": true,
-          "printWidth": 90
-        }
-      ]
-    },
-    "plugins": [
-      "prettier"
-    ]
+    }
   },
   "repository": "Luis-Chen/generator-redux-observable-kit",
   "license": "MIT"

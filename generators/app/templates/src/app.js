@@ -1,7 +1,10 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import {Link} from 'react-router-dom';
 
-import PageRouter from './routes'
+import 'semantic-ui-css/semantic.min.css';
+
+import PagesRouter from './routes';
+
 const App = () => {
 	return (
 		<div>
@@ -10,10 +13,10 @@ const App = () => {
 				<Link to="/about-us">About</Link>
 			</header>
 			<main>
-				<PageRouter />
+				<PagesRouter />
 			</main>
 		</div>
-	)
-}
+	);
+};
 
-export default App
+export default App;
