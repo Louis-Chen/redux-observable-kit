@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
-import { userReducer } from '../page/home/store/reducer';
+import { connectRouter } from 'connected-react-router'
 
-export default combineReducers({
-  routing: routerReducer,
-  appData: userReducer
+import { userReducer } from '../pages/home/store/reducer';
+
+export default (history) => combineReducers({
+  router: connectRouter(history),
+  user: userReducer
 });

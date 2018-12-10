@@ -2,80 +2,98 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
+const path = require('path');
 const _ = require('lodash');
+const mkdirp = require('mkdirp');
+
 module.exports = class extends Generator {
-  prompting() {
-    // Have Yeoman greet the user.
-    this.log(
-      yosay(
-        `Welcome to the terrific ${chalk.red(
-          'generator-redux-observable-kit'
-        )} generator!`
-      )
-    );
+	initializing() {
+		this.props = {};
+	}
 
-    const prompts = [
-      {
-        type: 'confirm',
-        name: 'someAnswer',
-        message: 'Would you like to enable this option?',
-        default: true
-      }
-    ];
+	prompting() {
+		// Have Yeoman greet the user.
+		this.log(yosay(`Welcome to the terrific ${chalk.red('generator-redux-observable-kit')} generator!`));
 
-    return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
-      this.props = props;
-    });
-  }
+		const prompts = [
+			{
+				type: 'input',
+				name: 'projectName',
+				message: 'What is the name of the new project?',
+				default: 'create-react-rx-app'
+			},
+			{
+				type: 'input',
+				name: 'projectTitle',
+				message: 'Please input project title (webpack示例):',
+				default: 'react-rx-kit'
+			}
+		];
 
-  writing() {
-    this.fs.copy(
-      this.templatePath('package.json'),
-      this.destinationPath('package.json'),
-      this.initPackage(),
-      this.renderTplFile()
-    );
-  }
-  initPackage() {
-    let pkg = this.fs.readJSON(this.templatePath('package.json'), {});
-    const { props } = this;
+		return this.prompt(prompts).then(props => {
+			// To access props later use this.props.someAnswer;
+			this.props = props;
+		});
+	}
 
-    pkg = _.merge(pkg, {
-      name: props.name,
-      description: props.description
-    });
+	writing() {
+		if (path.basename(this.destinationPath()) !== this.props.projectName) {
+			this.log(
+				'Your generator must be inside a folder named ' +
+					this.props.projectName +
+					'\n' +
+					'I\'ll automatically create this folder.'
+			);
+			mkdirp(this.props.projectName);
+			this.destinationRoot(this.destinationPath(this.props.projectName));
+		}
 
-    this.fs.writeJSON(this.destinationPath('package.json'), pkg);
-  }
+		this.fs.copy(
+			this.templatePath('package.json'),
+			this.destinationPath('package.json'),
+			this.initPackage(),
+			this.renderTplFile()
+		);
+	}
+	initPackage() {
+		let pkg = this.fs.readJSON(this.templatePath('package.json'), {});
+		const {props} = this;
 
-  renderTplFile() {
-    let target = [
-      'database/people.json',
-      'public/favicon.ico',
-      'public/index.html',
-      'public/manifest.json',
-      'src/page/home/components/home.js',
-      'src/page/home/containers/home.js',
-      'src/page/home/store/action.js',
-      'src/page/home/store/actionType.js',
-      'src/page/home/store/epic.js',
-      'src/page/home/store/reducer.js',
-      'src/routes/index.js',
-      'src/store/configureStore.js',
-      'src/store/epic.js',
-      'src/store/reducer.js',
-      'src/app.js',
-      'src/index.js',
-      'src/registerServiceWorker.js'
-    ];
+		pkg = _.merge(pkg, {
+			name: props.name,
+			description: props.description
+		});
 
-    _.forEach(target, file => {
-      this.fs.copyTpl(this.templatePath(file), this.destinationPath(file), this.props);
-    });
-  }
+		this.fs.writeJSON(this.destinationPath('package.json'), pkg);
+	}
 
-  install() {
-    this.installDependencies();
-  }
+	renderTplFile() {
+		let target = [
+			'database/people.json',
+			'public/favicon.ico',
+			'public/index.html',
+			'public/manifest.json',
+			'src/pages/home/components/home.js',
+			'src/pages/home/containers/home.js',
+			'src/pages/home/store/action.js',
+			'src/pages/home/store/actionType.js',
+			'src/pages/home/store/epic.js',
+			'src/pages/home/store/reducer.js',
+			'src/routes/index.js',
+			'src/store/configureStore.js',
+			'src/store/epic.js',
+			'src/store/reducer.js',
+			'src/app.js',
+			'src/index.js',
+			'src/registerServiceWorker.js'
+		];
+
+		_.forEach(target, file => {
+			this.fs.copyTpl(this.templatePath(file), this.destinationPath(file), this.props);
+		});
+	}
+
+	install() {
+		this.installDependencies();
+	}
 };
